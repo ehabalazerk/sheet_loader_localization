@@ -9,7 +9,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  runApp(EasyLocalization(
+  runApp(
+    EasyLocalization(
       supportedLocales: LocaleKeys.supportedLocales,
       path: 'resources/langs/langs.csv',
       // fallbackLocale: Locale('en', 'US'),
@@ -23,13 +24,14 @@ void main() async {
       // assetLoader: HttpAssetLoader()
       // assetLoader: FileAssetLoader()
       assetLoader: CsvAssetLoader(),
-      child: MyApp()
+      child: MyApp(),
       // assetLoader: YamlAssetLoader() //multiple files
       // assetLoader: YamlSingleAssetLoader() //single file
       // assetLoader: XmlAssetLoader() //multiple files
       // assetLoader: XmlSingleAssetLoader() //single file
       // assetLoader: CodegenLoader()
-      ));
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,16 +41,14 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const MyHomePage(title: 'Easy localization'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -82,11 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ElevatedButton(
             child: const Icon(Icons.language),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => LanguageView(), fullscreenDialog: true),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (_) => LanguageView(), fullscreenDialog: true));
             },
           ),
         ],
@@ -95,30 +91,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Spacer(
-              flex: 1,
+            const Spacer(flex: 1),
+            Text(
+              "",
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 19, fontWeight: FontWeight.bold),
             ),
-            Text("",
-                style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold)),
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(flex: 1),
             Text(
               "LocaleKeys.gender",
-              style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 19, fontWeight: FontWeight.bold),
             ).tr(args: ['aissat'], gender: _gender ? 'female' : 'male'),
             Text(
               LocaleKeys.title.tr(),
-              style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 15, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -128,12 +113,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 const Icon(Icons.female),
               ],
             ),
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(flex: 1),
             const Text(LocaleKeys.msg).tr(args: ['aissat', 'Flutter']),
-            const Text(LocaleKeys.msgNamed)
-                .tr(namedArgs: {'lang': 'Dart'}, args: ['Easy localization']),
+            const Text(LocaleKeys.msgNamed).tr(namedArgs: {'lang': 'Dart'}, args: ['Easy localization']),
             const Text(""),
             ElevatedButton(
               onPressed: () {
@@ -141,33 +123,23 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text(LocaleKeys.clickMe).tr(),
             ),
-            const SizedBox(
-              height: 15,
+            const SizedBox(height: 15),
+            Text(
+              "",
+              style: TextStyle(color: Colors.grey.shade900, fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text("",
-                style: TextStyle(
-                    color: Colors.grey.shade900,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 context.deleteSaveLocale();
               },
               child: const Text(""),
             ),
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(flex: 1),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: incrementCounter,
-        child: const Text('+1'),
-      ),
+      floatingActionButton: FloatingActionButton(onPressed: incrementCounter, child: const Text('+1')),
     );
   }
 }
